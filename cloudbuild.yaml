@@ -17,7 +17,6 @@
 # tag it with the name of the image.
 
 steps:
-echo "${BRANCH_NAME}"
 - name: 'docker'
   args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/helloworld-image', '.' ]
 
