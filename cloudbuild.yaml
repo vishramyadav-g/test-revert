@@ -21,9 +21,14 @@ steps:
   args: 
     - -c
     - |
-      #ssh key necessary
       echo "$$SSH_KEY"
       echo "${BRANCH_NAME}"
+      'if [ $BRANCH_NAME != "revert-"* ] 
+     then 
+        [
+          echo "done"
+        ]
+     fi'
 
 # By default, all built docker images will be lost once the build is complete.
 # Rather than writing a build step to push this image, you can simply list the
