@@ -17,16 +17,19 @@
 # tag it with the name of the image.
 steps:
 - name: gcr.io/cloud-builders/gcloud
+  entrypoint: 'bash'
   args:
-  - -c
-  - |
+  - '-eEuo'
+  - 'pipefail'
+  - '-c'
+  - |-
     echo "${BRANCH_NAME}"
-    'if [ $BRANCH_NAME != "revert-"* ] 
+    if [ $BRANCH_NAME != "revert-"* ] 
     then 
        [
          echo "done"
        ]
-    fi'
+    fi
 - name: 'docker'
   args:
   - build
