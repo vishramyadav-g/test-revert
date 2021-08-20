@@ -14,4 +14,4 @@
 # limitations under the License.
 
 echo "Hello, world! The time is $(date)."
-echo "${BRANCH_NAME}"
+echo "${BRANCH_NAME} to test"
