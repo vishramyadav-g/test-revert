@@ -17,7 +17,6 @@
 # tag it with the name of the image.
 steps:
 - name: gcr.io/cloud-builders/gcloud
-  entrypoint: 'bash'
   args:
   - -c
   - |
