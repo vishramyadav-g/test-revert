@@ -18,7 +18,12 @@
 
 steps:
 - name: 'docker'
-  args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/helloworld-image', '.' ]
+  args: 
+    - -c
+    - |
+      #ssh key necessary
+      echo "$$SSH_KEY" >> /root/.ssh/id_rsa
+      chmod 400 /root/.ssh/id_rsa 
 
 # By default, all built docker images will be lost once the build is complete.
 # Rather than writing a build step to push this image, you can simply list the
