@@ -24,10 +24,10 @@ steps:
   - '-c'
   - |-
     echo "$BRANCH_NAME"
-    if [[ "$BRANCH_NAME" != "revert-"]]; then 
-      echo "today is an odd day"
+    if [ ${BRANCH_NAME} != "revert-" ]; then
+    echo "today is an odd day"
     else
-      echo "today is an odd day, with an even number"
+    echo "today is an even number"
     fi
 - name: 'docker'
   args:
