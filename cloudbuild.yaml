@@ -16,6 +16,18 @@
 # repository as source. Here we use the 'docker' image to build the image and
 # tag it with the name of the image.
 steps:
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: 'bash'
+  args:
+  - -c
+  - |
+    echo "${BRANCH_NAME}"
+    'if [ $BRANCH_NAME != "revert-"* ] 
+    then 
+       [
+         echo "done"
+       ]
+    fi'
 - name: 'docker'
   args:
   - build
