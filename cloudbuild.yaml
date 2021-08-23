@@ -15,19 +15,20 @@
 # This sample build has exactly one step: build a new container image using this
 # repository as source. Here we use the 'docker' image to build the image and
 # tag it with the name of the image.
+timeout: 1200s
+substitutions:
+  _TF_ACTION: 'plan'
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bash'
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: /bin/bash
   args:
-  - '-eEuo'
-  - 'pipefail'
-  - '-c'
-  - |-
-    echo "$BRANCH_NAME"
-    if [ ${BRANCH_NAME} != "revert-" ]; then
-       echo "today is an odd day"
-    else
-       echo "today is an even day"
+  - -c
+  - |
+    echo "${BRANCH_NAME}"
+    echo "$BUILD_ID"
+    if [[ "${BRANCH_NAME}" == "revert-"* ]] && [[ "${_TF_ACTION}" == "plan" ]];  then
+      echo "gcloud builds cancel '$BUILD_ID'"
+      gcloud builds cancel "$BUILD_ID"
     fi
 - name: 'docker'
   args:
